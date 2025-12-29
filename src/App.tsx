@@ -267,18 +267,18 @@ const App = () => {
 
         {/* Bottom section */}
         <footer className="px-6 md:px-16 lg:px-24 py-8 flex flex-col md:flex-row justify-end items-start md:items-center gap-4 text-xs text-zinc-700">
-          <div className="flex items-center gap-4">
-            <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-            <a
-              href="https://pagespeed.web.dev/analysis?url=https://joeyjooste.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-emerald-400 transition-colors"
-            >
-              page speed
-            </a>
-          </div>
           <div className="flex gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+              <a
+                href="https://pagespeed.web.dev/analysis?url=https://joeyjooste.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-emerald-400 transition-colors"
+              >
+                page speed
+              </a>
+            </div>
             <span>no cookies</span>
             <span>no tracking</span>
             <span>deliberately minimal</span>
