@@ -152,7 +152,7 @@ const App = () => {
             >
               <p className="text-zinc-500 max-w-xs text-sm leading-relaxed">
                 software engineer. building fast things with typescript, react &
-                go. mass bloat extinction advocate.
+                go. less code, less wrong.
               </p>
               <div className="flex gap-4 text-sm">
                 <span className="text-zinc-600">dublin, ie</span>
@@ -298,7 +298,7 @@ const App = () => {
       </div>
 
       {/* Status indicator */}
-      <div className="fixed bottom-8 left-8 flex items-center gap-3 text-xs text-zinc-600">
+      <div className="fixed bottom-8 left-8 hidden md:flex items-center gap-3 text-xs text-zinc-600">
         <span className="font-mono">01</span>
         <div className="w-8 h-px bg-zinc-800" />
         <span>index</span>
