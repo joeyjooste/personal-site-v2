@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import Terminal from "./components/Terminal";
 
 const App = () => {
   const [section, setSection] = useState<string | null>(null);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [isLoaded, setIsLoaded] = useState(false);
-  const [terminalLines, setTerminalLines] = useState<string[]>([]);
-  const terminalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
@@ -16,37 +15,6 @@ const App = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  useEffect(() => {
-    if (!section || section !== "terminal") return;
-    if (terminalLines.length > 0) return;
-
-    const lines = [
-      "> initializing...",
-      "> loading void linux kernel...",
-      "> starting dwm...",
-      "> executing ~/.xinitrc...",
-      "> ready.",
-      "",
-      "  welcome to joeyjooste.com",
-      "",
-    ];
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < lines.length) {
-        setTerminalLines((prev) => [...prev, lines[i]]);
-        i++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 150);
-    return () => clearInterval(interval);
-  }, [section]);
-
-  useEffect(() => {
-    if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-    }
-  }, [terminalLines]);
 
   const experience = [
     {
@@ -110,7 +78,7 @@ const App = () => {
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-500 hover:text-emerald-400 transition-colors duration-200"
+                className="text-zinc-500 hover:text-emerald-400 transition-colors duration-200 cursor-pointer"
               >
                 {l.label}
               </a>
@@ -119,7 +87,7 @@ const App = () => {
         </header>
 
         {/* Main content */}
-        <main className="flex-1 flex flex-col justify-center px-6 md:px-16 lg:px-24 py-32">
+        <main className="flex-1 flex flex-col justify-start px-6 md:px-16 lg:px-24 pt-32 pb-16">
           {/* Hero */}
           <div className="max-w-5xl">
             <div className="overflow-hidden mb-2">
@@ -166,7 +134,7 @@ const App = () => {
 
           {/* Interactive sections */}
           <div
-            className="mt-24 md:mt-32 transition-opacity duration-1000 ease-out"
+            className="mt-8 md:mt-12 transition-opacity duration-1000 ease-out"
             style={{
               opacity: isLoaded ? 1 : 0,
               transitionDelay: "700ms",
@@ -177,7 +145,7 @@ const App = () => {
                 <button
                   key={s}
                   onClick={() => setSection(section === s ? null : s)}
-                  className={`px-4 py-2 text-sm border transition-all duration-200 ${
+                  className={`px-4 py-2 text-sm border transition-all duration-200 cursor-pointer ${
                     section === s
                       ? "bg-white text-black border-white"
                       : "border-zinc-800 text-zinc-500 hover:border-zinc-600 hover:text-zinc-300"
@@ -215,50 +183,31 @@ const App = () => {
             )}
 
             {/* Terminal section */}
-            {section === "terminal" && (
-              <div
-                ref={terminalRef}
-                className="bg-zinc-950 border border-zinc-800 p-4 font-mono text-sm h-64 overflow-y-auto animate-fadeIn"
-              >
-                {terminalLines.map((line, i) => (
-                  <div
-                    key={i}
-                    className={
-                      line?.startsWith(">")
-                        ? "text-emerald-400/70"
-                        : "text-zinc-500"
-                    }
-                  >
-                    {line || "\u00A0"}
-                  </div>
-                ))}
-                <div className="flex items-center gap-2 text-zinc-400 mt-2">
-                  <span className="text-emerald-400">❯</span>
-                  <span className="animate-pulse">_</span>
-                </div>
-              </div>
-            )}
+            {section === "terminal" && <Terminal />}
 
             {/* Stack section */}
             {section === "stack" && (
               <div className="py-4 flex flex-wrap gap-2 animate-fadeIn">
                 {[
-                  "typescript",
-                  "react",
-                  "golang",
-                  "python",
-                  "docker",
-                  "sqlite",
-                  "linux",
-                  "helix",
-                  "git",
+                  { name: "typescript", href: "https://www.typescriptlang.org" },
+                  { name: "react", href: "https://react.dev" },
+                  { name: "golang", href: "https://go.dev" },
+                  { name: "python", href: "https://www.python.org" },
+                  { name: "docker", href: "https://www.docker.com" },
+                  { name: "sqlite", href: "https://www.sqlite.org" },
+                  { name: "linux", href: "https://www.kernel.org" },
+                  { name: "helix", href: "https://helix-editor.com" },
+                  { name: "git", href: "https://git-scm.com" },
                 ].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-xs border border-zinc-800 text-zinc-500 hover:border-emerald-400/50 hover:text-emerald-400 transition-colors cursor-default"
+                  <a
+                    key={tech.name}
+                    href={tech.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 text-xs border border-zinc-800 text-zinc-500 hover:border-emerald-400/50 hover:text-emerald-400 transition-colors cursor-pointer"
                   >
-                    {tech}
-                  </span>
+                    {tech.name}
+                  </a>
                 ))}
               </div>
             )}
@@ -274,7 +223,7 @@ const App = () => {
                 href="https://pagespeed.web.dev/analysis?url=https://joeyjooste.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-emerald-400 transition-colors"
+                className="hover:text-emerald-400 transition-colors cursor-pointer"
               >
                 page speed
               </a>
