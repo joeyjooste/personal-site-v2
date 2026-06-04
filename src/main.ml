@@ -25,7 +25,8 @@ let links =
 ;;
 
 let work =
-  [ "2025", "Engineer", "Fused", "AI agents"
+  [ "2026", "Software Engineer", "Life Scientific", "Optimising revenue per headcount"
+  ; "2025", "Engineer", "Fused", "AI agents"
   ; "2024", "Co-founder", "CodeYard", "RAG before it was cool"
   ; "2023", "Freelance", "Independent", "Golang APIs, web systems"
   ]
@@ -45,8 +46,8 @@ let stack =
   [ "typescript", "https://www.typescriptlang.org"
   ; "react", "https://react.dev"
   ; "golang", "https://go.dev"
-  ; "python", "https://www.python.org"
-  ; "docker", "https://www.docker.com"
+  ; "ocaml", "https://ocaml.org"
+  ; "rust", "https://www.rust-lang.org"
   ; "sqlite", "https://www.sqlite.org"
   ; "linux", "https://www.kernel.org"
   ; "helix", "https://helix-editor.com"
@@ -156,7 +157,6 @@ let footer =
         ]
     ; Node.span [ txt "no cookies" ]
     ; Node.span [ txt "no tracking" ]
-    ; Node.span [ txt "deliberately minimal" ]
     ]
 ;;
 
