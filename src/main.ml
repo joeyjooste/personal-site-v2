@@ -25,10 +25,14 @@ let links =
 ;;
 
 let work =
-  [ "2026", "Software Engineer", "Life Scientific", "Optimising revenue per headcount"
-  ; "2025", "Engineer", "Fused", "AI agents"
-  ; "2024", "Co-founder", "CodeYard", "RAG before it was cool"
-  ; "2023", "Freelance", "Independent", "Golang APIs, web systems"
+  [ ( "2026"
+    , "Software Engineer"
+    , "Life Scientific"
+    , "https://www.lifescientific.com/en"
+    , "Optimising revenue per headcount" )
+  ; "2025", "Engineer", "Fused", "https://www.fused.io", "AI agents"
+  ; "2024", "Co-founder", "CodeYard", "https://codeyard.co.uk", "RAG before it was cool"
+  ; "2023", "Freelance", "Independent", "#", "Golang APIs, web systems"
   ]
 ;;
 
@@ -99,12 +103,14 @@ let hero =
 let work_view =
   shell
     [ "panel"; "work-panel" ]
-    (List.map work ~f:(fun (year, role, place, note) ->
+    (List.map work ~f:(fun (year, role, place, href, note) ->
        shell
          [ "work-row" ]
          [ Node.span ~attrs:[ Attr.class_ "year" ] [ txt year ]
          ; Node.strong [ txt role ]
-         ; Node.span ~attrs:[ Attr.class_ "place" ] [ txt ("@" ^ place) ]
+         ; (if String.is_prefix href ~prefix:"http"
+            then a ~href ~attrs:[ Attr.class_ "place" ] [ txt ("@" ^ place) ]
+            else Node.span ~attrs:[ Attr.class_ "place" ] [ txt ("@" ^ place) ])
          ; Node.span ~attrs:[ Attr.class_ "rule" ] []
          ; Node.span ~attrs:[ Attr.class_ "note" ] [ txt note ]
          ]))
