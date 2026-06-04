@@ -10,3 +10,4 @@ cp _build/default/src/main.bc.js public/main.bc.js
 cp _build/default/src/main.bc.js dist/main.bc.js
 cp index.html dist/index.html
 cp public/styles.css dist/styles.css
+cp -R public/fonts dist/fonts

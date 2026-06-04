@@ -25,33 +25,28 @@ let links =
 ;;
 
 let work =
-  [ "2025", "Engineer", "Fused", "AI agents and product systems"
-  ; "2024", "Co-founder", "CodeYard", "Retrieval systems before the wave had a name"
-  ; "2023", "Freelance", "Independent", "Golang APIs and practical web software"
+  [ "2025", "Engineer", "Fused", "AI agents"
+  ; "2024", "Co-founder", "CodeYard", "RAG before it was cool"
+  ; "2023", "Freelance", "Independent", "Golang APIs, web systems"
   ]
 ;;
 
 let writings =
-  [ ( "Notes on small software"
-    , "A running preference for tools that do less, expose more, and fail plainly."
-    , "draft" )
-  ; ( "Typed interfaces, boring edges"
-    , "What changes when frontend code is treated like an interface instead of a pile of \
-       effects."
-    , "essay" )
-  ; ( "Operational taste"
-    , "The difference between fast prototypes and software that survives contact with \
-       users."
-    , "field note" )
+  [ ( "less code, less wrong."
+    , "software engineer based in dublin, ireland. building fast things with typescript, \
+       react & go."
+    , "about.txt" )
+  ; "CodeYard", "AI-powered code assistant using RAG. Co-founded in 2024.", "project"
+  ; "Fused", "AI agent platform. Engineer since 2025.", "current"
   ]
 ;;
 
 let stack =
-  [ "ocaml", "https://ocaml.org"
-  ; "bonsai", "https://github.com/janestreet/bonsai"
-  ; "oxcaml", "https://oxcaml.org"
-  ; "go", "https://go.dev"
+  [ "typescript", "https://www.typescriptlang.org"
+  ; "react", "https://react.dev"
+  ; "golang", "https://go.dev"
   ; "python", "https://www.python.org"
+  ; "docker", "https://www.docker.com"
   ; "sqlite", "https://www.sqlite.org"
   ; "linux", "https://www.kernel.org"
   ; "helix", "https://helix-editor.com"
@@ -90,15 +85,20 @@ let hero =
     [ "hero" ]
     [ shell
         [ "kicker" ]
-        [ txt "Dublin, IE"; Node.span [ txt "/" ]; txt "software engineer" ]
+        [ txt "dublin, ie"
+        ; Node.span [ txt "/" ]
+        ; txt "void linux"
+        ; Node.span [ txt "/" ]
+        ; txt "dwm"
+        ]
     ; Node.h1
         ~attrs:[ Attr.class_ "hero-title" ]
         [ Node.span [ txt "Joey" ]; Node.span [ txt "Jooste" ] ]
     ; Node.p
         ~attrs:[ Attr.class_ "hero-copy" ]
         [ txt
-            "I build compact, fast product systems with a bias for typed boundaries, \
-             calm interfaces, and code that earns its place."
+            "software engineer. building fast things with typescript, react & go. less \
+             code, less wrong."
         ]
     ]
 ;;
