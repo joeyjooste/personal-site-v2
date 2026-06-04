@@ -80,14 +80,7 @@ let header =
 let hero =
   shell
     [ "hero" ]
-    [ shell
-        [ "kicker" ]
-        [ txt "dublin, ie"
-        ; Node.span [ txt "/" ]
-        ; txt "void linux"
-        ; Node.span [ txt "/" ]
-        ; txt "dwm"
-        ]
+    [ shell [ "kicker" ] [ txt "dublin, ie" ]
     ; Node.h1
         ~attrs:[ Attr.class_ "hero-title" ]
         [ Node.span [ txt "Joey" ]; Node.span [ txt "Jooste" ] ]
