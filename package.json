@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "sh scripts/build.sh",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "bun run build && bunx wrangler pages deploy dist"
   },
   "dependencies": {},
   "devDependencies": {

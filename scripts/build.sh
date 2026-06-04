@@ -2,7 +2,7 @@
 set -eu
 
 eval "$(opam env --switch=. --shell=sh)"
-dune build ./src/main.bc.js
+dune build --profile release ./src/main.bc.js
 rm -rf dist
 mkdir -p dist public
 rm -f public/main.bc.js
