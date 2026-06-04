@@ -34,8 +34,8 @@ let work =
 
 let writings =
   [ ( "less code, less wrong."
-    , "software engineer based in dublin, ireland. building fast things with typescript, \
-       react & go."
+    , "software engineer building fast things in typescript and ocaml, stretching what's \
+       possible with AI agents."
     , "about.txt" )
   ; "CodeYard", "AI-powered code assistant using RAG. Co-founded in 2024.", "project"
   ; "Fused", "AI agent platform. Engineer since 2025.", "current"
@@ -98,8 +98,8 @@ let hero =
     ; Node.p
         ~attrs:[ Attr.class_ "hero-copy" ]
         [ txt
-            "software engineer. building fast things with typescript, react & go. less \
-             code, less wrong."
+            "software engineer building fast things in typescript and ocaml, stretching \
+             what's possible with AI agents."
         ]
     ]
 ;;
