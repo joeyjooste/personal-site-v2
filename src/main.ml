@@ -37,13 +37,14 @@ let work =
 let writing = "coming soon"
 
 let a ?(attrs = []) ~href children =
-  Node.a
-    ~attrs:
-      (Attr.href href
-       :: Attr.create "target" "_blank"
-       :: Attr.create "rel" "noopener noreferrer"
-       :: attrs)
-    children
+  (* Only true external (http) links open in a new tab; mailto/anchor links
+     should navigate in place. *)
+  let external_links =
+    if String.is_prefix href ~prefix:"http"
+    then [ Attr.create "target" "_blank"; Attr.create "rel" "noopener noreferrer" ]
+    else []
+  in
+  Node.a ~attrs:(Attr.href href :: (external_links @ attrs)) children
 ;;
 
 let shell attrs children = Node.div ~attrs children
@@ -51,8 +52,8 @@ let txt = Node.text
 let tag ?(attrs = []) name children = Node.create name ~attrs children
 
 let header =
-  shell
-    [ Style.site_header ]
+  Node.header
+    ~attrs:[ Style.site_header ]
     [ Node.div ~attrs:[ Style.mark ] [ txt "JJ" ]
     ; tag
         "nav"
@@ -80,7 +81,13 @@ let hero =
 
 let work_view =
   shell
-    [ Style.panel; Style.work_panel ]
+    [ Style.panel
+    ; Style.work_panel
+    ; Attr.create "role" "tabpanel"
+    ; Attr.create "id" "section-panel"
+    ; Attr.create "aria-labelledby" "tab-work"
+    ; Attr.create "tabindex" "0"
+    ]
     (List.map work ~f:(fun (year, role, place, href, note) ->
        shell
          [ Style.work_row ]
@@ -96,7 +103,13 @@ let work_view =
 
 let writings_view =
   shell
-    [ Style.panel; Style.writing_panel ]
+    [ Style.panel
+    ; Style.writing_panel
+    ; Attr.create "role" "tabpanel"
+    ; Attr.create "id" "section-panel"
+    ; Attr.create "aria-labelledby" "tab-writing"
+    ; Attr.create "tabindex" "0"
+    ]
     [ Node.p ~attrs:[ Style.writing_note ] [ txt writing ] ]
 ;;
 
@@ -106,12 +119,11 @@ let section_view = function
 ;;
 
 let footer =
-  tag
-    "footer"
+  Node.footer
     ~attrs:[ Style.site_footer ]
     [ shell
         [ Style.signal ]
-        [ Node.span ~attrs:[ Style.signal_dot ] []
+        [ Node.span ~attrs:[ Style.signal_dot; Attr.create "aria-hidden" "true" ] []
         ; a
             ~href:"https://pagespeed.web.dev/analysis?url=https://joeyjooste.com"
             ~attrs:[ Style.quiet_link ]
@@ -139,7 +151,10 @@ let component graph =
         [ Style.tab
         ; (if selected then Style.selected else Attr.empty)
         ; Attr.create "type" "button"
-        ; Attr.create "aria-pressed" (Bool.to_string selected)
+        ; Attr.create "role" "tab"
+        ; Attr.create "id" ("tab-" ^ Section.label tab)
+        ; Attr.create "aria-selected" (Bool.to_string selected)
+        ; Attr.create "aria-controls" "section-panel"
         ; Attr.on_click (fun _ -> set_section tab)
         ]
       [ txt (Section.label tab) ]
@@ -151,11 +166,16 @@ let component graph =
         "main"
         ~attrs:[ Style.content ]
         [ hero
-        ; shell [ Style.tabs ] (List.map Section.all ~f:tab_button)
+        ; shell
+            [ Style.tabs
+            ; Attr.create "role" "tablist"
+            ; Attr.create "aria-label" "Sections"
+            ]
+            (List.map Section.all ~f:tab_button)
         ; section_view section
         ]
     ; footer
-    ; shell [ Style.monogram ] [ txt "JJ" ]
+    ; Node.div ~attrs:[ Style.monogram; Attr.create "aria-hidden" "true" ] [ txt "JJ" ]
     ]
 ;;
 
