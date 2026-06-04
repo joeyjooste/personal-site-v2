@@ -12,4 +12,5 @@
   bonsai
   js_of_ocaml
   js_of_ocaml-ppx
-  ppx_jane))
+  ppx_jane
+  ppx_css))

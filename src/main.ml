@@ -46,31 +46,31 @@ let a ?(attrs = []) ~href children =
     children
 ;;
 
-let shell attrs children = Node.div ~attrs:(List.map attrs ~f:Attr.class_) children
+let shell attrs children = Node.div ~attrs children
 let txt = Node.text
 let tag ?(attrs = []) name children = Node.create name ~attrs children
 
 let header =
   shell
-    [ "site-header" ]
-    [ Node.div ~attrs:[ Attr.class_ "mark" ] [ txt "JJ" ]
+    [ Style.site_header ]
+    [ Node.div ~attrs:[ Style.mark ] [ txt "JJ" ]
     ; tag
         "nav"
-        ~attrs:[ Attr.class_ "nav-links"; Attr.create "aria-label" "External links" ]
+        ~attrs:[ Style.nav_links; Attr.create "aria-label" "External links" ]
         (List.map links ~f:(fun (label, href) ->
-           a ~href ~attrs:[ Attr.class_ "nav-link" ] [ txt label ]))
+           a ~href ~attrs:[ Style.nav_link ] [ txt label ]))
     ]
 ;;
 
 let hero =
   shell
-    [ "hero" ]
-    [ shell [ "kicker" ] [ txt "dublin, ie" ]
+    [ Style.hero ]
+    [ shell [ Style.kicker ] [ txt "dublin, ie" ]
     ; Node.h1
-        ~attrs:[ Attr.class_ "hero-title" ]
+        ~attrs:[ Style.hero_title ]
         [ Node.span [ txt "Joey" ]; Node.span [ txt "Jooste" ] ]
     ; Node.p
-        ~attrs:[ Attr.class_ "hero-copy" ]
+        ~attrs:[ Style.hero_copy ]
         [ txt
             "software engineer building fast things in typescript and ocaml, stretching \
              what's possible with AI agents."
@@ -80,24 +80,24 @@ let hero =
 
 let work_view =
   shell
-    [ "panel"; "work-panel" ]
+    [ Style.panel; Style.work_panel ]
     (List.map work ~f:(fun (year, role, place, href, note) ->
        shell
-         [ "work-row" ]
-         [ Node.span ~attrs:[ Attr.class_ "year" ] [ txt year ]
+         [ Style.work_row ]
+         [ Node.span ~attrs:[ Style.year ] [ txt year ]
          ; Node.strong [ txt role ]
          ; (if String.is_prefix href ~prefix:"http"
-            then a ~href ~attrs:[ Attr.class_ "place" ] [ txt ("@" ^ place) ]
-            else Node.span ~attrs:[ Attr.class_ "place" ] [ txt ("@" ^ place) ])
-         ; Node.span ~attrs:[ Attr.class_ "rule" ] []
-         ; Node.span ~attrs:[ Attr.class_ "note" ] [ txt note ]
+            then a ~href ~attrs:[ Style.place ] [ txt ("@" ^ place) ]
+            else Node.span ~attrs:[ Style.place ] [ txt ("@" ^ place) ])
+         ; Node.span ~attrs:[ Style.rule ] []
+         ; Node.span ~attrs:[ Style.note ] [ txt note ]
          ]))
 ;;
 
 let writings_view =
   shell
-    [ "panel"; "writing-panel" ]
-    [ Node.p ~attrs:[ Attr.class_ "writing-note" ] [ txt writing ] ]
+    [ Style.panel; Style.writing_panel ]
+    [ Node.p ~attrs:[ Style.writing_note ] [ txt writing ] ]
 ;;
 
 let section_view = function
@@ -108,13 +108,13 @@ let section_view = function
 let footer =
   tag
     "footer"
-    ~attrs:[ Attr.class_ "site-footer" ]
+    ~attrs:[ Style.site_footer ]
     [ shell
-        [ "signal" ]
-        [ Node.span ~attrs:[ Attr.class_ "signal-dot" ] []
+        [ Style.signal ]
+        [ Node.span ~attrs:[ Style.signal_dot ] []
         ; a
             ~href:"https://pagespeed.web.dev/analysis?url=https://joeyjooste.com"
-            ~attrs:[ Attr.class_ "quiet-link" ]
+            ~attrs:[ Style.quiet_link ]
             [ txt "page speed" ]
         ]
     ; Node.span [ txt "no cookies" ]
@@ -136,7 +136,8 @@ let component graph =
     let selected = Section.equal tab section in
     Node.button
       ~attrs:
-        [ Attr.classes [ "tab"; (if selected then "selected" else "") ]
+        [ Style.tab
+        ; (if selected then Style.selected else Attr.empty)
         ; Attr.create "type" "button"
         ; Attr.create "aria-pressed" (Bool.to_string selected)
         ; Attr.on_click (fun _ -> set_section tab)
@@ -144,17 +145,17 @@ let component graph =
       [ txt (Section.label tab) ]
   in
   shell
-    [ "app-shell" ]
+    [ Style.app_shell ]
     [ header
     ; tag
         "main"
-        ~attrs:[ Attr.class_ "content" ]
+        ~attrs:[ Style.content ]
         [ hero
-        ; shell [ "tabs" ] (List.map Section.all ~f:tab_button)
+        ; shell [ Style.tabs ] (List.map Section.all ~f:tab_button)
         ; section_view section
         ]
     ; footer
-    ; shell [ "monogram" ] [ txt "JJ" ]
+    ; shell [ Style.monogram ] [ txt "JJ" ]
     ]
 ;;
 

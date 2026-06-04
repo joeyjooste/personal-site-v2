@@ -1,6 +1,12 @@
 (executables
  (modes js)
  (names main)
- (libraries bonsai.web)
+ (libraries bonsai.web ppx_css.inline_css)
  (preprocess
-  (pps js_of_ocaml-ppx bonsai.ppx_bonsai ppx_jane)))
+  (pps js_of_ocaml-ppx bonsai.ppx_bonsai ppx_jane ppx_css)))
+
+(rule
+ (targets style.ml style.mli style__generated.ml style__generated.mli)
+ (deps style.css)
+ (action
+  (bash "%{bin:css_inliner} %{deps} \"((rewrite ()))\"")))
