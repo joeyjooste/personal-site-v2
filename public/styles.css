@@ -87,7 +87,6 @@ a {
 .mark,
 .kicker,
 .tab,
-.writing-kind,
 .site-footer,
 .stack-link,
 .year,
@@ -272,42 +271,17 @@ a {
   border-bottom: 1px solid rgba(24, 23, 20, 0.16);
 }
 
-.writing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 2.5vw, 34px);
+.writing-panel {
+  display: block;
 }
 
-.writing-item {
-  min-height: clamp(148px, 21vh, 210px);
-  display: flex;
-  flex-direction: column;
-  padding-top: 14px;
-  border-top: 1px solid rgba(24, 23, 20, 0.22);
-}
-
-.writing-kind {
-  color: #741f17;
-  font-size: 12px;
-  font-weight: 400;
-  text-transform: lowercase;
-}
-
-.writing-item h2 {
-  margin: clamp(24px, 4vh, 42px) 0 14px;
-  color: #181714;
-  font-size: clamp(24px, 2.55vw, 34px);
+.writing-note {
+  margin: 0;
+  color: rgba(24, 23, 20, 0.68);
+  font-size: 18px;
   font-weight: 350;
-  line-height: 0.98;
-  font-variation-settings: "wght" 350, "wdth" 110;
-}
-
-.writing-item p {
-  margin: auto 0 0;
-  color: rgba(24, 23, 20, 0.58);
-  font-size: 16px;
-  font-weight: 350;
-  line-height: 1.28;
+  line-height: 1.35;
+  font-variation-settings: "wght" 350, "wdth" 104;
 }
 
 .stack-panel {
@@ -439,13 +413,8 @@ a {
     display: none;
   }
 
-  .writing-grid,
   .stack-panel {
     grid-template-columns: 1fr;
-  }
-
-  .writing-item {
-    min-height: auto;
   }
 
   .site-footer {

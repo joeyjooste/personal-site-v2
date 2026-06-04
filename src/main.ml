@@ -12,7 +12,7 @@ module Section = struct
 
   let label = function
     | Work -> "work"
-    | Writings -> "writings"
+    | Writings -> "writing"
     | Stack -> "stack"
   ;;
 end
@@ -32,13 +32,7 @@ let work =
   ]
 ;;
 
-let writings =
-  [ ( "comming soon once I get a random burst of motivation"
-    , "software engineer building fast things in typescript and ocaml, stretching what's \
-       possible with AI agents."
-    , "writing" )
-  ]
-;;
+let writing = "coming soon"
 
 let stack =
   [ "typescript", "https://www.typescriptlang.org"
@@ -118,14 +112,8 @@ let work_view =
 
 let writings_view =
   shell
-    [ "panel"; "writing-grid" ]
-    (List.map writings ~f:(fun (title, summary, kind) ->
-       shell
-         [ "writing-item" ]
-         [ Node.span ~attrs:[ Attr.class_ "writing-kind" ] [ txt kind ]
-         ; Node.h2 [ txt title ]
-         ; Node.p [ txt summary ]
-         ]))
+    [ "panel"; "writing-panel" ]
+    [ Node.p ~attrs:[ Attr.class_ "writing-note" ] [ txt writing ] ]
 ;;
 
 let stack_view =
