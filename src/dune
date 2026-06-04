@@ -1,0 +1,6 @@
+(executables
+ (modes js)
+ (names main)
+ (libraries bonsai.web)
+ (preprocess
+  (pps js_of_ocaml-ppx bonsai.ppx_bonsai ppx_jane)))

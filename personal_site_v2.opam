@@ -1,0 +1,18 @@
+opam-version: "2.0"
+synopsis: "Personal site rewritten in Bonsai"
+description: "A minimal Bonsai/js_of_ocaml personal website."
+maintainer: "Joey Jooste"
+authors: "Joey Jooste"
+license: "UNLICENSED"
+depends: [
+  "ocaml" {>= "5.1.0"}
+  "dune" {>= "3.11"}
+  "bonsai"
+  "js_of_ocaml"
+  "js_of_ocaml-ppx"
+  "ppx_jane"
+]
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs]
+]
