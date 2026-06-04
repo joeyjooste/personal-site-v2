@@ -7,7 +7,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "sh scripts/build.sh",
     "preview": "vite preview",
-    "deploy": "bun run build && bunx wrangler pages deploy dist"
+    "deploy": "bun run build && CLOUDFLARE_ACCOUNT_ID=cbc769120117c93624e413d0356ba750 bunx wrangler pages deploy dist"
   },
   "dependencies": {},
   "devDependencies": {
