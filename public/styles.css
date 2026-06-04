@@ -88,7 +88,6 @@ a {
 .kicker,
 .tab,
 .site-footer,
-.stack-link,
 .year,
 .place,
 .note {
@@ -284,32 +283,6 @@ a {
   font-variation-settings: "wght" 350, "wdth" 104;
 }
 
-.stack-panel {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(24, 23, 20, 0.14);
-}
-
-.stack-link {
-  min-height: 54px;
-  display: flex;
-  align-items: center;
-  padding: 18px 20px;
-  background: #efebe0;
-  color: rgba(24, 23, 20, 0.62);
-  font-size: 12px;
-  font-weight: 400;
-  transition:
-    color 160ms ease,
-    background 160ms ease;
-}
-
-.stack-link:hover {
-  background: #e6dfcf;
-  color: #741f17;
-}
-
 .site-footer {
   width: min(1180px, calc(100vw - 48px));
   margin: 0 auto;
@@ -411,10 +384,6 @@ a {
   .rule,
   .note {
     display: none;
-  }
-
-  .stack-panel {
-    grid-template-columns: 1fr;
   }
 
   .site-footer {

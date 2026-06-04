@@ -7,13 +7,11 @@ module Section = struct
   type t =
     | Work
     | Writings
-    | Stack
   [@@deriving sexp, equal, enumerate]
 
   let label = function
     | Work -> "work"
     | Writings -> "writing"
-    | Stack -> "stack"
   ;;
 end
 
@@ -37,19 +35,6 @@ let work =
 ;;
 
 let writing = "coming soon"
-
-let stack =
-  [ "typescript", "https://www.typescriptlang.org"
-  ; "react", "https://react.dev"
-  ; "golang", "https://go.dev"
-  ; "ocaml", "https://ocaml.org"
-  ; "rust", "https://www.rust-lang.org"
-  ; "sqlite", "https://www.sqlite.org"
-  ; "linux", "https://www.kernel.org"
-  ; "helix", "https://helix-editor.com"
-  ; "git", "https://git-scm.com"
-  ]
-;;
 
 let a ?(attrs = []) ~href children =
   Node.a
@@ -115,17 +100,9 @@ let writings_view =
     [ Node.p ~attrs:[ Attr.class_ "writing-note" ] [ txt writing ] ]
 ;;
 
-let stack_view =
-  shell
-    [ "panel"; "stack-panel" ]
-    (List.map stack ~f:(fun (label, href) ->
-       a ~href ~attrs:[ Attr.class_ "stack-link" ] [ txt label ]))
-;;
-
 let section_view = function
   | Section.Work -> work_view
   | Writings -> writings_view
-  | Stack -> stack_view
 ;;
 
 let footer =
