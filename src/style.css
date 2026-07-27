@@ -49,7 +49,7 @@
 body {
   min-width: 320px;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   background:
     linear-gradient(90deg, rgba(24, 23, 20, 0.05) 1px, transparent 1px) 0 0 /
       clamp(72px, 9vw, 132px) 100%,
@@ -68,10 +68,10 @@ a {
 }
 
 .app-shell {
-  height: 100svh;
+  min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
-  overflow: hidden;
 }
 
 .site-header {
@@ -125,6 +125,10 @@ a {
   font-weight: 360;
   line-height: 1;
   transition: color 160ms ease;
+}
+
+.quiet-link {
+  font-size: 12px;
 }
 
 .nav-link:hover,
@@ -332,17 +336,17 @@ a {
 }
 
 @media (max-width: 860px) {
-  body {
-    overflow: hidden;
-  }
-
   .site-header {
-    grid-template-columns: 1fr;
-    gap: 18px;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
   }
 
   .nav-links {
-    flex-wrap: wrap;
+    justify-content: flex-end;
+    min-width: 0;
+    gap: clamp(14px, 4vw, 22px);
+    flex-wrap: nowrap;
   }
 
   .content {
@@ -373,12 +377,19 @@ a {
   }
 
   .panel {
-    max-height: 28vh;
+    max-height: none;
+    overflow: visible;
   }
 
   .work-row {
     grid-template-columns: 4.5rem 1fr;
     gap: 8px 18px;
+    align-items: start;
+  }
+
+  .place {
+    grid-column: 2;
+    white-space: nowrap;
   }
 
   .rule,
