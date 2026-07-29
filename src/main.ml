@@ -88,7 +88,7 @@ let hero =
             ()
         ; tag
             "figcaption"
-            [ Node.span [ txt "CAPE TOWN / ATLANTIC FIELD STUDY" ]
+            [ Node.span [ txt "CAPE TOWN / ATLANTIC SEABOARD" ]
             ; Node.span [ txt "HOME / 33.9249° S" ]
             ]
         ]
@@ -149,7 +149,7 @@ let rathmines =
         ()
     ; tag
         "figcaption"
-        [ Node.span [ txt "RATHMINES / STREET STUDY" ]
+        [ Node.span [ txt "DUBLIN / RATHMINES" ]
         ; a
             ~href:
               "https://commons.wikimedia.org/wiki/File:Junction,_Rathmines_(8102282250).jpg"

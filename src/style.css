@@ -488,6 +488,10 @@ figcaption {
     line-height: 0.82;
   }
 
+  .hero-title span:last-child {
+    margin-top: 0.12em;
+  }
+
   .hero-copy {
     max-width: 24rem;
   }
